@@ -166,6 +166,23 @@ late right [black_object|...|black_check_right .|enemy_black] -> [black_object|.
 +late down [black_object black_check_down .|enemy_black1] -> [black_object .|enemy_black2]
 +late up [black_object black_check_up .|enemy_black] -> [black_object black_check_up1 .|enemy_black1]
 +late up [black_object black_check_up .|enemy_black1] -> [black_object .|enemy_black2]
++late right [black_object|...|black_check_right .|enemy_black2] -> [black_object|...|.|enemy_black2]
++late right [black_object|...|black_check_right1 .|enemy_black2] -> [black_object|...|.|enemy_black2]
++late left [black_object|...|black_check_left .|enemy_black2] -> [black_object|...|.|enemy_black2]
++late left [black_object|...|black_check_left1 .|enemy_black2] -> [black_object|...|.|enemy_black2]
++late down [black_object|...|black_check_down .|enemy_black2] -> [black_object|...|.|enemy_black2]
++late down [black_object|...|black_check_down1 .|enemy_black2] -> [black_object|...|.|enemy_black2]
++late up [black_object|...|black_check_up .|enemy_black2] -> [black_object|...|.|enemy_black2]
++late up [black_object|...|black_check_up1 .|enemy_black2] -> [black_object|...|.|enemy_black2]
++late right [black_object black_check_right1 .|enemy_black2] -> [black_object .|enemy_black2]
++late left [black_object black_check_left .|enemy_black2] -> [black_object .|enemy_black2]
++late left [black_object black_check_left1 .|enemy_black2] -> [black_object .|enemy_black2]
++late down [black_object black_check_down .|enemy_black2] -> [black_object .|enemy_black2]
++late down [black_object black_check_down1 .|enemy_black2] -> [black_object .|enemy_black2]
++late up [black_object black_check_up .|enemy_black2] -> [black_object .|enemy_black2]
++late up [black_object black_check_up1 .|enemy_black2] -> [black_object .|enemy_black2]
+
+
 
 late right [black_object|...|black_check_right1 . no black_checkxr1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
 +late left [black_object|...|black_check_left1 . no black_checkxl1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
