@@ -1,0 +1,78 @@
+title My Game
+author TGE & W1N
+homepage www.puzzlescript.net
+
+========
+OBJECTS
+========
+
+Background 
+lightgrey 
+
+Wall 
+grey
+
+temp
+grey
+
+Shadow
+transparent
+
+Player
+Black   
+
+Enemy_black
+Black lightgrey
+01110
+10101
+11011
+10101
+01110
+
+=======
+LEGEND
+=======
+
+. = Background
+# = Wall
+P = Player
+x = Enemy_black
+unseeable = player or enemy_black
+
+=======
+SOUNDS
+=======
+
+================
+COLLISIONLAYERS
+================
+
+Background
+shadow, temp
+Player, Wall, enemy_black
+
+======
+RULES     
+======    
+[ Player ] -> [ Player Shadow ]
+late [player|...|.|enemy_black] -> [player|...|temp|.]
+late [temp] -> [enemy_black]
+late [ Player Shadow ] -> CANCEL
+late [Shadow] -> []
+
+==============
+WINCONDITIONS
+==============
+
+
+=======     
+LEVELS
+=======
+
+#########
+#.......#
+#.....x.#
+#.P.x...#
+#.......#
+#.......#
+#########
