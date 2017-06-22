@@ -112,10 +112,11 @@ SOUNDS
 COLLISIONLAYERS
 ================
 
+
 Background
-exit
-shadow, black_check_up, black_check_left, black_check_down, black_check_right, black_check_up1, black_check_left1, black_check_down1, black_check_right1, Player
-black_b, Wall, enemy_black, enemy_black1, enemy_black2
+shadow, black_check_up, black_check_left, black_check_down, black_check_right, black_check_up1, black_check_left1, black_check_down1, black_check_right1, exit
+Player
+black_b, Wall, enemy_black, enemy_black1, enemy_black2, dead
 
 ======
 RULES     
@@ -172,5 +173,5 @@ message Make it to the exit
 message Level 1: Dash
 
 #######
-#
+#######
 
