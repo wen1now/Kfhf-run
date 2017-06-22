@@ -103,6 +103,10 @@ x = Enemy_black
 unseeable = player or enemy_black or wall or black_b
 black_object = black_b
 black_check = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_left1 or black_check_down1 or black_check_right1
+black_checkxr1 = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_left1 or black_check_down1
+black_checkxl1 = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_down1 or black_check_right1
+black_checkxd1 = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_left1 or black_check_right1
+black_checkxu1 = black_check_up or black_check_left or black_check_down or black_check_right or black_check_left1 or black_check_down1 or black_check_right1
 
 =======
 SOUNDS
@@ -115,27 +119,36 @@ COLLISIONLAYERS
 Background
 exit
 shadow
-black_b
-Wall, enemy_black, enemy_black1, enemy_black2, Player
-black_check_up, black_check_left, black_check_down, black_check_right, black_check_up1, black_check_left1, black_check_down1, black_check_right1
-dead
+enemy_black, enemy_black1, enemy_black2
+Wall, Player
+black_check_up
+black_check_left
+black_check_down
+black_check_right
+black_check_up1
+black_check_left1
+black_check_down1
+black_check_right1
+black_b,dead
 
 ======
 RULES     
 ======    
+[ > Player | enemy_black] -> CANCEL
 [ > Player black_b] -> [ > Player > black_b ]
 [ > Player | black_b] -> [ > Player |> black_b ]
 [ Player ] -> [ Player Shadow ]
 
-late right [black_object|no unseeable] -> [black_object|black_check_right]
-+late left [black_object|no unseeable] -> [black_object|black_check_left]
-+late down [black_object|no unseeable] -> [black_object|black_check_down]
-+late up [black_object|no unseeable] -> [black_object|black_check_up]
+late [black_object] -> [black_object black_check_right black_check_left black_check_down black_check_up]
 
 late right [black_object|...|black_check_right .|. no unseeable] -> [black_object|...|.|black_check_right .]
 +late left [black_object|...|black_check_left .|. no unseeable] -> [black_object|...|.|black_check_left .]
 +late down [black_object|...|black_check_down .|. no unseeable] -> [black_object|...|.|black_check_down .]
 +late up [black_object|...|black_check_up .|. no unseeable] -> [black_object|...|.|black_check_up .]
++late right [black_object black_check_right .|. no unseeable] -> [black_object .|black_check_right .]
++late left [black_object black_check_left .|. no unseeable] -> [black_object .|black_check_left .]
++late down [black_object black_check_down .|. no unseeable] -> [black_object .|black_check_down .]
++late up [black_object black_check_up .|. no unseeable] -> [black_object .|black_check_up .]
 
 late right [black_object|...|black_check_right .|enemy_black] -> [black_object|...|black_check_right1 .|enemy_black1]
 +late right [black_object|...|black_check_right .|enemy_black1] -> [black_object|...|.|enemy_black2]
@@ -145,17 +158,30 @@ late right [black_object|...|black_check_right .|enemy_black] -> [black_object|.
 +late down [black_object|...|black_check_down .|enemy_black1] -> [black_object|...|.|enemy_black2]
 +late up [black_object|...|black_check_up .|enemy_black] -> [black_object|...|black_check_up1 .|enemy_black1]
 +late up [black_object|...|black_check_up .|enemy_black1] -> [black_object|...|.|enemy_black2]
++late right [black_object black_check_right .|enemy_black] -> [black_object black_check_right1 .|enemy_black1]
++late right [black_object black_check_right .|enemy_black1] -> [black_object .|enemy_black2]
++late left [black_object black_check_left .|enemy_black] -> [black_object black_check_left1 .|enemy_black1]
++late left [black_object black_check_left .|enemy_black1] -> [black_object .|enemy_black2]
++late down [black_object black_check_down .|enemy_black] -> [black_object black_check_down1 .|enemy_black1]
++late down [black_object black_check_down .|enemy_black1] -> [black_object .|enemy_black2]
++late up [black_object black_check_up .|enemy_black] -> [black_object black_check_up1 .|enemy_black1]
++late up [black_object black_check_up .|enemy_black1] -> [black_object .|enemy_black2]
 
-late right [black_object|...|black_check_right1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
-late left [black_object|...|black_check_left1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
-late down [black_object|...|black_check_down1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
-late up [black_object|...|black_check_up1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
+late right [black_object|...|black_check_right1 . no black_checkxr1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
++late left [black_object|...|black_check_left1 . no black_checkxl1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
++late down [black_object|...|black_check_down1 . no black_checkxd1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
++late up [black_object|...|black_check_up1 . no black_checkxu1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
++late right [black_object black_check_right1 . no black_checkxr1|enemy_black1 .] -> [black_object . enemy_black2|.]
++late left [black_object black_check_left1 . no black_checkxl1|enemy_black1 .] -> [black_object . enemy_black2|.]
++late down [black_object black_check_down1 . no black_checkxd1|enemy_black1 .] -> [black_object . enemy_black2|.]
++late up [black_object black_check_up1 . no black_checkxu1|enemy_black1 .] -> [black_object . enemy_black2|.]
 
 late [black_check] -> []
 late [enemy_black2] -> [enemy_black]
 late [enemy_black1] -> [enemy_black]
 late [Player Shadow] -> CANCEL
 late [shadow] -> []
+late [Player black_b enemy_black] -> [dead]
 
 
 ==============
@@ -173,6 +199,17 @@ message Avoid the crosses
 
 message Make it to the exit
 message Level 1 and 2 coming soon!
+
+message Level 0: Testing
+
+#########
+#.......#
+#.....x.#
+#.P.x...#
+#.......#
+#.......#
+#########
+
 message Level 3: Dash
 
 ######
