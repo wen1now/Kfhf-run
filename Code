@@ -1,7 +1,3 @@
-title My Game
-author TGE & W1N
-homepage www.puzzlescript.net
-
 ========
 OBJECTS
 ========
@@ -12,8 +8,29 @@ lightgrey
 Wall 
 grey
 
-check
-grey
+black_check_left
+brown
+
+black_check_up
+brown
+
+black_check_down
+brown
+
+black_check_right
+brown
+
+black_check_left1
+brown
+
+black_check_up1
+brown
+
+black_check_down1
+brown
+
+black_check_right1
+brown
 
 Shadow
 transparent
@@ -29,6 +46,22 @@ Black lightgrey
 10101
 01110
 
+Enemy_black1
+Black lightgrey
+01110
+10101
+11011
+10101
+01110
+
+Enemy_black2
+Black lightgrey
+01110
+10101
+11011
+10101
+01110
+
 =======
 LEGEND
 =======
@@ -37,7 +70,10 @@ LEGEND
 # = Wall
 P = Player
 x = Enemy_black
+B = Block
 unseeable = player or enemy_black
+black_object = player
+black_check = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_left1 or black_check_down1 or black_check_right1
 
 =======
 SOUNDS
@@ -48,17 +84,42 @@ COLLISIONLAYERS
 ================
 
 Background
-shadow, temp
-Player, Wall, enemy_black
+shadow, black_check_up, black_check_left, black_check_down, black_check_right, black_check_up1, black_check_left1, black_check_down1, black_check_right1
+Player, Wall, enemy_black, enemy_black1, enemy_black2
 
 ======
 RULES     
 ======    
 [ Player ] -> [ Player Shadow ]
-late [player|no unseeable] -> [player|check]
-late [player|...|check|no unseeable] -> [player|...||check]
-late [player|...|check|enemy_black] -> [player|...|enemy_black|]
-late [check] -> []
+
+late right [black_object|no unseeable] -> [black_object|black_check_right]
++late left [black_object|no unseeable] -> [black_object|black_check_left]
++late down [black_object|no unseeable] -> [black_object|black_check_down]
++late up [black_object|no unseeable] -> [black_object|black_check_up]
+
+late right [black_object|...|black_check_right .|. no unseeable] -> [black_object|...|.|black_check_right .]
++late left [black_object|...|black_check_left .|. no unseeable] -> [black_object|...|.|black_check_left .]
++late down [black_object|...|black_check_down .|. no unseeable] -> [black_object|...|.|black_check_down .]
++late up [black_object|...|black_check_up .|. no unseeable] -> [black_object|...|.|black_check_up .]
+
+late right [black_object|...|black_check_right .|enemy_black] -> [black_object|...|black_check_right1 .|enemy_black1]
++late right [black_object|...|black_check_right .|enemy_black1] -> [black_object|...|black_check_right1 .|enemy_black2]
++late left [black_object|...|black_check_left .|enemy_black] -> [black_object|...|black_check_left1 .|enemy_black1]
++late left [black_object|...|black_check_left .|enemy_black1] -> [black_object|...|black_check_left1 .|enemy_black2]
++late down [black_object|...|black_check_down .|enemy_black] -> [black_object|...|black_check_down1 .|enemy_black1]
++late down [black_object|...|black_check_down .|enemy_black1] -> [black_object|...|black_check_down1 .|enemy_black2]
++late up [black_object|...|black_check_up .|enemy_black] -> [black_object|...|black_check_up1 .|enemy_black1]
++late up [black_object|...|black_check_up .|enemy_black1] -> [black_object|...|black_check_up1 .|enemy_black2]
+
+late right [black_object|...|black_check_right1 .|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
+late left [black_object|...|black_check_left1 .|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
+late down [black_object|...|black_check_down1 .|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
+late up [black_object|...|black_check_up1 .|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
+
+late [black_check] -> []
+late [enemy_black2] -> [enemy_black]
+late [enemy_black1] -> [enemy_black]
+
 late [ Player Shadow ] -> CANCEL
 late [Shadow] -> []
 
