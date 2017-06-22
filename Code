@@ -229,16 +229,6 @@ message Avoid the crosses
 message Make it to the exit
 message Level 1 and 2 coming soon!
 
-message Level 0: Testing
-
-#########
-#.......#
-#.....x.#
-#.P.x...#
-#.......#
-#.......#
-#########
-
 message Level 3: Dash
 
 ######
