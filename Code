@@ -227,7 +227,23 @@ message Act I: Prison cell
 message Avoid the crosses
 
 message Make it to the exit
-message Level 1 and 2 coming soon!
+message Level 1: Avoidance
+
+############
+#P...#.....#
+#....#...x.#
+#..x......x#
+#....#.....#
+###.##.....#
+###.###.#.##
+#..........#
+-..x.......#
+#x.........#
+#..........#
+#...x..x.x.#
+############
+
+message Level 2 coming soon!
 
 message Level 3: Dash
 
