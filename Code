@@ -227,8 +227,7 @@ message Act I: Prison cell
 message Avoid the crosses
 
 message Make it to the exit
-message Level 1: Avoidance
-
+message Level 1: Two cell
 
 ############
 #P...#.....#
@@ -238,7 +237,7 @@ message Level 1: Avoidance
 #....#.....#
 ######-#####
 
-message Level 2: Proposed
+message Level 2: Avoidance
 
 ############
 #P...#.....#
