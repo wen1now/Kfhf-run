@@ -243,7 +243,15 @@ message Level 1: Avoidance
 #...x..x.x.#
 ############
 
-message Level 2 coming soon!
+message Level 2: Proposed
+
+############
+#P...#.....#
+#.........x#
+#...x#.....#
+#.........x#
+#....#.....#
+######-#####
 
 message Level 3: Dash
 
