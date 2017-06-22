@@ -229,6 +229,17 @@ message Avoid the crosses
 message Make it to the exit
 message Level 1: Avoidance
 
+
+############
+#P...#.....#
+#.........x#
+#...x#.....#
+#.........x#
+#....#.....#
+######-#####
+
+message Level 2: Proposed
+
 ############
 #P...#.....#
 #....#...x.#
@@ -242,16 +253,6 @@ message Level 1: Avoidance
 #..........#
 #...x..x.x.#
 ############
-
-message Level 2: Proposed
-
-############
-#P...#.....#
-#.........x#
-#...x#.....#
-#.........x#
-#....#.....#
-######-#####
 
 message Level 3: Dash
 
