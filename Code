@@ -58,9 +58,6 @@ black
 .000.
 .....
 
-counted
-transparent
-
 dead
 red lightgrey
 .....
@@ -122,7 +119,6 @@ black_b
 Wall, enemy_black, enemy_black1, enemy_black2, Player
 black_check_up, black_check_left, black_check_down, black_check_right, black_check_up1, black_check_left1, black_check_down1, black_check_right1
 dead
-counted
 
 ======
 RULES     
@@ -130,9 +126,6 @@ RULES
 [ > Player black_b] -> [ > Player > black_b ]
 [ > Player | black_b] -> [ > Player |> black_b ]
 [ Player ] -> [ Player Shadow ]
-(
-late [ Player black_b no one|enemy_black no counted] -> [ Player black_b one |enemy_black counted]
-late [ Player black_b one|enemy_black no counted] -> [ Player black_b two |enemy_black ])
 
 late right [black_object|no unseeable] -> [black_object|black_check_right]
 +late left [black_object|no unseeable] -> [black_object|black_check_left]
