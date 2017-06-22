@@ -55,8 +55,10 @@ Player, Wall, enemy_black
 RULES     
 ======    
 [ Player ] -> [ Player Shadow ]
-late [player|...|.|enemy_black] -> [player|...|temp|.]
-late [temp] -> [enemy_black]
+late [player|no unseeable] -> [player|check]
+late [player|...|check|no unseeable] -> [player|...||check]
+late [player|...|check|enemy_black] -> [player|...|enemy_black|]
+late [check] -> []
 late [ Player Shadow ] -> CANCEL
 late [Shadow] -> []
 
