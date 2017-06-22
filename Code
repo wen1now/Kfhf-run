@@ -70,7 +70,6 @@ LEGEND
 # = Wall
 P = Player
 x = Enemy_black
-B = Block
 unseeable = player or enemy_black
 black_object = player
 black_check = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_left1 or black_check_down1 or black_check_right1
