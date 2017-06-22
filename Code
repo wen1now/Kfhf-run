@@ -40,7 +40,7 @@ black_check_right1
 brown
 
 Shadow
-transparent
+grey
 
 Player
 red
@@ -57,6 +57,9 @@ black
 .000.
 .000.
 .....
+
+counted
+transparent
 
 dead
 red lightgrey
@@ -112,18 +115,24 @@ SOUNDS
 COLLISIONLAYERS
 ================
 
-
 Background
-shadow, black_check_up, black_check_left, black_check_down, black_check_right, black_check_up1, black_check_left1, black_check_down1, black_check_right1, exit
-Player
-black_b, Wall, enemy_black, enemy_black1, enemy_black2, dead
+exit
+shadow
+black_b
+Wall, enemy_black, enemy_black1, enemy_black2, Player
+black_check_up, black_check_left, black_check_down, black_check_right, black_check_up1, black_check_left1, black_check_down1, black_check_right1
+dead
+counted
 
 ======
 RULES     
 ======    
-[ Player ] -> [ Player Shadow ]
 [ > Player black_b] -> [ > Player > black_b ]
 [ > Player | black_b] -> [ > Player |> black_b ]
+[ Player ] -> [ Player Shadow ]
+(
+late [ Player black_b no one|enemy_black no counted] -> [ Player black_b one |enemy_black counted]
+late [ Player black_b one|enemy_black no counted] -> [ Player black_b two |enemy_black ])
 
 late right [black_object|no unseeable] -> [black_object|black_check_right]
 +late left [black_object|no unseeable] -> [black_object|black_check_left]
@@ -152,13 +161,14 @@ late up [black_object|...|black_check_up1|enemy_black1 .] -> [black_object|...|.
 late [black_check] -> []
 late [enemy_black2] -> [enemy_black]
 late [enemy_black1] -> [enemy_black]
-late [ Player Shadow] -> CANCEL
+late [Player Shadow] -> CANCEL
+late [shadow] -> []
 
 
 ==============
 WINCONDITIONS
 ==============
-
+All player on exit
 
 =======     
 LEVELS
@@ -169,14 +179,22 @@ message Act I: Prison cell
 message Avoid the crosses
 
 message Make it to the exit
+message Level 1 and 2 coming soon!
+message Level 3: Dash
 
-message Level 1: Dash
+######
+#P...-
+#...x#
+#..x.#
+#....#
+######
 
-#########
-#.......#
-#.....x.#
-#.P.x...#
-#.......#
-#.......#
-#########
+message Level 4: Exit
+
+#######
+#P....#
+#....x#
+#....x#
+#.....-
+#######
 
