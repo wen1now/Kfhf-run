@@ -1,9 +1,16 @@
+title My Game
+author TGE & W1N
+homepage www.puzzlescript.net
+
 ========
 OBJECTS
 ========
 
 Background 
 lightgrey 
+
+Exit
+green
 
 Wall 
 grey
@@ -36,7 +43,28 @@ Shadow
 transparent
 
 Player
-Black   
+red
+.....
+.....
+..0..
+.....
+.....
+
+black_b
+black
+.....
+.000.
+.000.
+.000.
+.....
+
+dead
+red lightgrey
+.....
+.010.
+.101.
+.010.
+.....
 
 Enemy_black
 Black lightgrey
@@ -62,16 +90,18 @@ Black lightgrey
 10101
 01110
 
+
 =======
 LEGEND
 =======
 
 . = Background
 # = Wall
-P = Player
+- = exit
+P = Player and black_b
 x = Enemy_black
-unseeable = player or enemy_black
-black_object = player
+unseeable = player or enemy_black or wall or black_b
+black_object = black_b
 black_check = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_left1 or black_check_down1 or black_check_right1
 
 =======
@@ -83,13 +113,16 @@ COLLISIONLAYERS
 ================
 
 Background
-shadow, black_check_up, black_check_left, black_check_down, black_check_right, black_check_up1, black_check_left1, black_check_down1, black_check_right1
-Player, Wall, enemy_black, enemy_black1, enemy_black2
+exit
+shadow, black_check_up, black_check_left, black_check_down, black_check_right, black_check_up1, black_check_left1, black_check_down1, black_check_right1, Player
+black_b, Wall, enemy_black, enemy_black1, enemy_black2
 
 ======
 RULES     
 ======    
 [ Player ] -> [ Player Shadow ]
+[ > Player black_b] -> [ > Player > black_b ]
+[ > Player | black_b] -> [ > Player |> black_b ]
 
 late right [black_object|no unseeable] -> [black_object|black_check_right]
 +late left [black_object|no unseeable] -> [black_object|black_check_left]
@@ -102,25 +135,24 @@ late right [black_object|...|black_check_right .|. no unseeable] -> [black_objec
 +late up [black_object|...|black_check_up .|. no unseeable] -> [black_object|...|.|black_check_up .]
 
 late right [black_object|...|black_check_right .|enemy_black] -> [black_object|...|black_check_right1 .|enemy_black1]
-+late right [black_object|...|black_check_right .|enemy_black1] -> [black_object|...|black_check_right1 .|enemy_black2]
++late right [black_object|...|black_check_right .|enemy_black1] -> [black_object|...|.|enemy_black2]
 +late left [black_object|...|black_check_left .|enemy_black] -> [black_object|...|black_check_left1 .|enemy_black1]
-+late left [black_object|...|black_check_left .|enemy_black1] -> [black_object|...|black_check_left1 .|enemy_black2]
++late left [black_object|...|black_check_left .|enemy_black1] -> [black_object|...|.|enemy_black2]
 +late down [black_object|...|black_check_down .|enemy_black] -> [black_object|...|black_check_down1 .|enemy_black1]
-+late down [black_object|...|black_check_down .|enemy_black1] -> [black_object|...|black_check_down1 .|enemy_black2]
++late down [black_object|...|black_check_down .|enemy_black1] -> [black_object|...|.|enemy_black2]
 +late up [black_object|...|black_check_up .|enemy_black] -> [black_object|...|black_check_up1 .|enemy_black1]
-+late up [black_object|...|black_check_up .|enemy_black1] -> [black_object|...|black_check_up1 .|enemy_black2]
++late up [black_object|...|black_check_up .|enemy_black1] -> [black_object|...|.|enemy_black2]
 
-late right [black_object|...|black_check_right1 .|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
-late left [black_object|...|black_check_left1 .|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
-late down [black_object|...|black_check_down1 .|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
-late up [black_object|...|black_check_up1 .|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
+late right [black_object|...|black_check_right1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
+late left [black_object|...|black_check_left1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
+late down [black_object|...|black_check_down1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
+late up [black_object|...|black_check_up1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
 
 late [black_check] -> []
 late [enemy_black2] -> [enemy_black]
 late [enemy_black1] -> [enemy_black]
+late [ Player Shadow] -> CANCEL
 
-late [ Player Shadow ] -> CANCEL
-late [Shadow] -> []
 
 ==============
 WINCONDITIONS
@@ -131,10 +163,14 @@ WINCONDITIONS
 LEVELS
 =======
 
-#########
-#.......#
-#.....x.#
-#.P.x...#
-#.......#
-#.......#
-#########
+message Act I: Prison cell
+
+message Avoid the crosses
+
+message Make it to the exit
+
+message Level 1: Dash
+
+#######
+#
+
