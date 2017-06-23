@@ -233,17 +233,24 @@ message Act I: Prison cell
 message Avoid the crosses
 
 message Make it to the exit
-message Level 1: Two cell
+message Level 1: Single cell
+#######
+#P....-
+#....x#
+#.....#
+##...##
+#######
+message Level 2: Two cell
 
 ############
 #P...#.....#
 #.........x#
-#...x#.....#
+#...x#...#.#
 #.........x#
 #....#.....#
 ######-#####
 
-message Level 2: Avoidance
+message Level 3: Avoidance
 
 ############
 #P...#.....#
@@ -259,7 +266,7 @@ message Level 2: Avoidance
 #...x..x.x.#
 ############
 
-message Level 3: Dash
+message Level 4: Dash
 
 ######
 #P...-
@@ -268,7 +275,7 @@ message Level 3: Dash
 #....#
 ######
 
-message Level 4: Kerfuffle
+message Level 5: Kerfuffle
 
 #######
 #P....#
@@ -277,7 +284,7 @@ message Level 4: Kerfuffle
 #.....-
 #######
 
-message Level 5: Interference
+message Level 6: Interference
 
 ###########
 ###.x.x.x.#
