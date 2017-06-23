@@ -1,4 +1,4 @@
-title My Game
+title Jailbreak
 author TGE, W1N & BBQ
 homepage www.puzzlescript.net
 
@@ -96,11 +96,14 @@ LEGEND
 =======
 
 . = Background
+b = black_b
 # = Wall
 - = exit
 P = Player and black_b
 x = Enemy_black
 unseeable = enemy_black or wall or black_b
+enemies = enemy_black
+blocks = black_b
 blockade = wall or black_b
 black_object = black_b
 black_check = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_left1 or black_check_down1 or black_check_right1
@@ -140,6 +143,7 @@ RULES
 [ > Player black_b] -> [ > Player > black_b ]
 [ > Player | black_b] -> [ > Player |> black_b ]
 [ Player ] -> [ Player Shadow ]
+
 
 late [black_object] -> [black_object black_check_right black_check_left black_check_down black_check_up]
 
@@ -222,6 +226,8 @@ All player on exit
 LEVELS
 =======
 
+(test levels here)
+
 message Act I: Prison cell
 
 message Avoid the crosses
@@ -262,7 +268,7 @@ message Level 3: Dash
 #....#
 ######
 
-message Level 4: Exit
+message Level 4: Kerfuffle
 
 #######
 #P....#
@@ -270,4 +276,16 @@ message Level 4: Exit
 #....x#
 #.....-
 #######
+
+message Level 5: Interference
+
+###########
+###.x.x.x.#
+#........x#
+#P#.......#
+#........x#
+###..x.x..-
+###########
+
+message CONGRATULATIONS! You have won...
 
