@@ -144,9 +144,14 @@ RULES
 [ > Player | black_b] -> [ > Player |> black_b ]
 [ Player ] -> [ Player Shadow ]
 
+(begin raycasting code)
+(substitute black with any other colour to work for another colour)
+(depends on black_object, black_check{xr1/xl1/xd1/xu1} [and black_check_{right/left/down/up{1}} objects], unseeable [impenetrable object], enemy_black{1/2} and blockade [subset of unseeable for 'harmless diffusing objects'])
 
+(generates rays)
 late [black_object] -> [black_object black_check_right black_check_left black_check_down black_check_up]
 
+(projects rays out, unless they bump into an unseeable object)
 late right [black_object|...|black_check_right .|. no unseeable] -> [black_object|...|.|black_check_right .]
 +late left [black_object|...|black_check_left .|. no unseeable] -> [black_object|...|.|black_check_left .]
 +late down [black_object|...|black_check_down .|. no unseeable] -> [black_object|...|.|black_check_down .]
@@ -155,7 +160,9 @@ late right [black_object|...|black_check_right .|. no unseeable] -> [black_objec
 +late left [black_object black_check_left .|. no unseeable] -> [black_object .|black_check_left .]
 +late down [black_object black_check_down .|. no unseeable] -> [black_object .|black_check_down .]
 +late up [black_object black_check_up .|. no unseeable] -> [black_object .|black_check_up .]
-+late right [black_object|...|black_check_right .|blockade .] -> [black_object|...|.|blockade .]
+
+(removes rays that have hit a blockade [i.e. not an enemy])
+late right [black_object|...|black_check_right .|blockade .] -> [black_object|...|.|blockade .]
 +late left [black_object|...|black_check_left .|blockade .] -> [black_object|...|.|blockade .]
 +late down [black_object|...|black_check_down .|blockade .] -> [black_object|...|.|blockade .]
 +late up [black_object|...|black_check_up .|blockade .] -> [black_object|...|.|blockade .]
@@ -164,7 +171,10 @@ late right [black_object|...|black_check_right .|. no unseeable] -> [black_objec
 +late down [black_object black_check_down .|blockade .] -> [black_object .|blockade .]
 +late up [black_object black_check_up .|blockade .] -> [black_object .|blockade .]
 
-
+(Does a few things:
+ a. counts the number of rays pointing to each enemy [up to a maximum of 2, which means don't move]
+ b. if the ray is pointing to an enemy which is at 2, prunes it
+)
 late right [black_object|...|black_check_right .|enemy_black] -> [black_object|...|black_check_right1 .|enemy_black1]
 +late right [black_object|...|black_check_right .|enemy_black1] -> [black_object|...|.|enemy_black2]
 +late left [black_object|...|black_check_left .|enemy_black] -> [black_object|...|black_check_left1 .|enemy_black1]
@@ -197,9 +207,7 @@ late right [black_object|...|black_check_right .|enemy_black] -> [black_object|.
 +late up [black_object black_check_up .|enemy_black2] -> [black_object .|enemy_black2]
 +late up [black_object black_check_up1 .|enemy_black2] -> [black_object .|enemy_black2]
 
-
-
-
+(If a black object that has exactly one ray pointing to it, moves it there iff it's the only ray in that square, else doesn't move because of the conflict)
 late right [black_object|...|black_check_right1 . no black_checkxr1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
 +late left [black_object|...|black_check_left1 . no black_checkxl1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
 +late down [black_object|...|black_check_down1 . no black_checkxd1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
@@ -209,9 +217,13 @@ late right [black_object|...|black_check_right1 . no black_checkxr1|enemy_black1
 +late down [black_object black_check_down1 . no black_checkxd1|enemy_black1 .] -> [black_object . enemy_black2|.]
 +late up [black_object black_check_up1 . no black_checkxu1|enemy_black1 .] -> [black_object . enemy_black2|.]
 
+(cleans up)
 late [black_check] -> []
 late [enemy_black2] -> [enemy_black]
 late [enemy_black1] -> [enemy_black]
+
+(end ray-casting code)
+
 late [Player Shadow] -> CANCEL
 late [shadow] -> []
 late [Player black_b enemy_black] -> [Player dead]
