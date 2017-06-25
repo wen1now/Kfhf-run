@@ -298,13 +298,13 @@ message Level 5: Kerfuffle
 
 message Level 6: Interference
 
-###########
-###.x.x.x.#
-#........x#
-#P#.......#
-#........x#
-###..x.x..-
-###########
+#############
+#####.......#
+#x.........x#
+###P#......x#
+#x.........x#
+#####....x..-
+#############
 
 message CONGRATULATIONS! You have won...
 
