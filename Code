@@ -50,6 +50,14 @@ red
 .....
 .....
 
+black_p
+black
+.....
+.000.
+.000.
+.000.
+.....
+
 black_b
 black
 .....
@@ -99,13 +107,12 @@ LEGEND
 b = black_b
 # = Wall
 - = exit
-P = Player and black_b
+P = Player and black_p
 x = Enemy_black
-unseeable = enemy_black or wall or black_b
+unseeable = enemy_black or wall or black_p or black_b
 enemies = enemy_black
-blocks = black_b
-blockade = wall or black_b
-black_object = black_b
+blockade = wall or black_b or black_p
+black_object = black_p or black_p
 black_check = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_left1 or black_check_down1 or black_check_right1
 black_checkxr1 = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_left1 or black_check_down1
 black_checkxl1 = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_down1 or black_check_right1
@@ -133,23 +140,30 @@ black_check_up1
 black_check_left1
 black_check_down1
 black_check_right1
-black_b,dead
+black_p,dead
 
 ======
 RULES     
 ======    
 [ > Player dead] -> CANCEL
 [ > Player | enemy_black] -> CANCEL
-[ > Player black_b] -> [ > Player > black_b ]
+[ > Player black_p] -> [ > Player > black_p ]
 [ > Player | black_b] -> [ > Player |> black_b ]
+[ > Player | black_b | blockade] -> CANCEL
 [ Player ] -> [ Player Shadow ]
 
 (begin raycasting code)
 (substitute black with any other colour to work for another colour)
 (depends on black_object, black_check{xr1/xl1/xd1/xu1} [and black_check_{right/left/down/up{1}} objects], unseeable [impenetrable object], enemy_black{1/2} and blockade [subset of unseeable for 'harmless diffusing objects'])
 
+(generates rays for player)
+late [black_p] -> [black_object black_check_right black_check_left black_check_down black_check_up]
+
 (generates rays)
-late [black_object] -> [black_object black_check_right black_check_left black_check_down black_check_up]
+late right [black_b|. no unseeable] -> [black_object|. black_check_right]
+late down [black_b|. no unseeable] -> [black_object|. black_check_left]
+late left [black_b|. no unseeable] -> [black_object|. black_check_down]
+late up [black_b|. no unseeable] -> [black_object|. black_check_up]
 
 (projects rays out, unless they bump into an unseeable object)
 late right [black_object|...|black_check_right .|. no unseeable] -> [black_object|...|.|black_check_right .]
