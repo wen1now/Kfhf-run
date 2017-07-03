@@ -131,6 +131,7 @@ Background
 exit
 shadow
 enemy_black, enemy_black1, enemy_black2
+black_b
 Wall, Player
 black_check_up
 black_check_left
@@ -157,13 +158,13 @@ RULES
 (depends on black_object, black_check{xr1/xl1/xd1/xu1} [and black_check_{right/left/down/up{1}} objects], unseeable [impenetrable object], enemy_black{1/2} and blockade [subset of unseeable for 'harmless diffusing objects'])
 
 (generates rays for player)
-late [black_p] -> [black_object black_check_right black_check_left black_check_down black_check_up]
+late [black_p] -> [black_p black_check_right black_check_left black_check_down black_check_up]
 
 (generates rays)
-late right [black_b|. no unseeable] -> [black_object|. black_check_right]
-late down [black_b|. no unseeable] -> [black_object|. black_check_left]
-late left [black_b|. no unseeable] -> [black_object|. black_check_down]
-late up [black_b|. no unseeable] -> [black_object|. black_check_up]
+late right [black_b|. no unseeable] -> [black_b|. black_check_right]
+late down [black_b|. no unseeable] -> [black_b|. black_check_left]
+late left [black_b|. no unseeable] -> [black_b|. black_check_down]
+late up [black_b|. no unseeable] -> [black_b|. black_check_up]
 
 (projects rays out, unless they bump into an unseeable object)
 late right [black_object|...|black_check_right .|. no unseeable] -> [black_object|...|.|black_check_right .]
