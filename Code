@@ -112,7 +112,7 @@ x = Enemy_black
 unseeable = enemy_black or wall or black_p or black_b
 enemies = enemy_black
 blockade = wall or black_b or black_p
-black_object = black_p or black_p
+black_object = black_b or black_p
 black_check = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_left1 or black_check_down1 or black_check_right1
 black_checkxr1 = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_left1 or black_check_down1
 black_checkxl1 = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_down1 or black_check_right1
@@ -149,8 +149,8 @@ RULES
 [ > Player dead] -> CANCEL
 [ > Player | enemy_black] -> CANCEL
 [ > Player black_p] -> [ > Player > black_p ]
+[ > Player | black_b | unseeable] -> CANCEL
 [ > Player | black_b] -> [ > Player |> black_b ]
-[ > Player | black_b | blockade] -> CANCEL
 [ Player ] -> [ Player Shadow ]
 
 (begin raycasting code)
@@ -158,13 +158,7 @@ RULES
 (depends on black_object, black_check{xr1/xl1/xd1/xu1} [and black_check_{right/left/down/up{1}} objects], unseeable [impenetrable object], enemy_black{1/2} and blockade [subset of unseeable for 'harmless diffusing objects'])
 
 (generates rays for player)
-late [black_p] -> [black_p black_check_right black_check_left black_check_down black_check_up]
-
-(generates rays)
-late right [black_b|. no unseeable] -> [black_b|. black_check_right]
-late down [black_b|. no unseeable] -> [black_b|. black_check_left]
-late left [black_b|. no unseeable] -> [black_b|. black_check_down]
-late up [black_b|. no unseeable] -> [black_b|. black_check_up]
+late [black_object] -> [black_object black_check_right black_check_left black_check_down black_check_up]
 
 (projects rays out, unless they bump into an unseeable object)
 late right [black_object|...|black_check_right .|. no unseeable] -> [black_object|...|.|black_check_right .]
@@ -223,14 +217,14 @@ late right [black_object|...|black_check_right .|enemy_black] -> [black_object|.
 +late up [black_object black_check_up1 .|enemy_black2] -> [black_object .|enemy_black2]
 
 (If a black object that has exactly one ray pointing to it, moves it there iff it's the only ray in that square, else doesn't move because of the conflict)
-late right [black_object|...|black_check_right1 . no black_checkxr1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
-+late left [black_object|...|black_check_left1 . no black_checkxl1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
-+late down [black_object|...|black_check_down1 . no black_checkxd1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
-+late up [black_object|...|black_check_up1 . no black_checkxu1|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
-+late right [black_object black_check_right1 . no black_checkxr1|enemy_black1 .] -> [black_object . enemy_black2|.]
-+late left [black_object black_check_left1 . no black_checkxl1|enemy_black1 .] -> [black_object . enemy_black2|.]
-+late down [black_object black_check_down1 . no black_checkxd1|enemy_black1 .] -> [black_object . enemy_black2|.]
-+late up [black_object black_check_up1 . no black_checkxu1|enemy_black1 .] -> [black_object . enemy_black2|.]
+late right [black_object|...|black_check_right1 . no black_checkxr1 no black_b|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
++late left [black_object|...|black_check_left1 . no black_checkxl1 no black_b|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
++late down [black_object|...|black_check_down1 . no black_checkxd1 no black_b|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
++late up [black_object|...|black_check_up1 . no black_checkxu1 no black_b|enemy_black1 .] -> [black_object|...|. enemy_black2|.]
++late right [black_p black_check_right1 . no black_checkxr1|enemy_black1 .] -> [black_p . enemy_black2|.]
++late left [black_p black_check_left1 . no black_checkxl1|enemy_black1 .] -> [black_p . enemy_black2|.]
++late down [black_p black_check_down1 . no black_checkxd1|enemy_black1 .] -> [black_p . enemy_black2|.]
++late up [black_p black_check_up1 . no black_checkxu1|enemy_black1 .] -> [black_p . enemy_black2|.]
 
 (cleans up)
 late [black_check] -> []
@@ -260,6 +254,19 @@ message Act I: Prison cell
 message Avoid the crosses
 
 message Make it to the exit
+
+message Test level
+
+#################
+#.....x.........#
+#...............#
+#......x........#
+#..x.....b......#
+#...........b...#
+-P............x.#
+#...............#
+#################
+
 message Level 1: Single cell
 #######
 #P....-
@@ -267,6 +274,7 @@ message Level 1: Single cell
 #.....#
 ##...##
 #######
+
 message Level 2: Two cell
 
 ############
