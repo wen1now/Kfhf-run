@@ -241,7 +241,7 @@ late [enemy_black1] -> [enemy_black]
 
 late [Player Shadow] -> CANCEL
 late [shadow] -> []
-late [Player black_b enemy_black] -> [Player dead]
+late [Player enemy_black] -> [Player dead]
 
 
 ==============
