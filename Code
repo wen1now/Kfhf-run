@@ -1,5 +1,5 @@
 title Jailbreak
-author TGE, W1N & BBQ
+author TGE, W1N & BBQ (TGE: initial game idea, W1N: Most of the levels, BBQ: most of the coding)
 homepage www.puzzlescript.net
 
 ========
@@ -246,8 +246,16 @@ All player on exit
 =======     
 LEVELS
 =======
+(New levels are welcome! Please send them to https://chat.stackexchange.com/rooms/61048/puzzlescript, photo or direct code.
+(click level editor at the top to make a good level))
+
+
 
 (test levels here)
+
+
+
+
 
 message Act I: Prison cell
 
@@ -255,17 +263,6 @@ message Avoid the crosses
 
 message Make it to the exit
 
-message Test level
-
-#################
-#.....x.........#
-#...............#
-#......x........#
-#..x.....b......#
-#...........b...#
--P............x.#
-#...............#
-#################
 
 message Level 1: Single cell
 #######
@@ -324,10 +321,55 @@ message Level 6: Interference
 #############
 #####.......#
 #x.........x#
-###P#......x#
+#P..#......x#
 #x.........x#
 #####....x..-
 #############
+
+message Act II: Tunnels
+
+message Level 1: Dead ahead
+
+##########
+#p.......-
+#x.x#...x#
+#...#...x#
+#...#....#
+#.#.##.###
+#........#
+#...#....#
+#........#
+##########
+
+message Level 2: Messy escape
+
+############
+####x#######
+####.#######
+###......p##
+###..#.#..##
+###..#....x#
+#x........x#
+##.#.#######
+#....#...x.#
+#....#.....-
+#.#..#.....#
+#....#.#.x.#
+#...x#....x#
+#...####.###
+#x........##
+#x........##
+############
+
+message Level 3: High security
+
+############
+#......xxxx-
+#.....######
+#.....######
+#.....######
+#p....######
+############
 
 message CONGRATULATIONS! You have won...
 
