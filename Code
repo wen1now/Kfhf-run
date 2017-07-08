@@ -1,5 +1,5 @@
 title Jailbreak
-author TGE, W1N & BBQ (TGE: initial game idea, W1N: Most of the levels, BBQ: most of the coding)
+author TGE, W1N & BBQ
 homepage www.puzzlescript.net
 
 ========
@@ -62,7 +62,7 @@ black_b
 black
 .....
 .000.
-.000.
+.0.0.
 .000.
 .....
 
@@ -250,10 +250,7 @@ LEVELS
 (click level editor at the top to make a good level))
 
 
-
 (test levels here)
-
-
 
 
 
@@ -326,6 +323,15 @@ message Level 6: Interference
 #####....x..-
 #############
 
+message Level 7: Field run
+########
+#x.....#
+#x.....#
+#x.....#
+-x.....#
+#####p##
+########
+
 message Act II: Tunnels
 
 message Level 1: Dead ahead
@@ -335,13 +341,27 @@ message Level 1: Dead ahead
 #x.x#...x#
 #...#...x#
 #...#....#
-#.#.##.###
-#........#
+###.##.###
+##.......#
 #...#....#
 #........#
 ##########
 
-message Level 2: Messy escape
+message Level 2: Long corridor
+
+#################
+#...x.....x.....-
+#.##.#####x######
+#.#.....#.x#...p#
+#.#.....#.x#....#
+#.#x....#.......#
+#.#x....#.......#
+#.#x....#.......#
+#.###.#######.###
+#.............###
+#################
+
+message Level 3: Messy escape
 
 ############
 ####x#######
@@ -361,7 +381,7 @@ message Level 2: Messy escape
 #x........##
 ############
 
-message Level 3: High security
+message Level 4: High security
 
 ############
 #......xxxx-
