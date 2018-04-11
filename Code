@@ -66,6 +66,14 @@ black
 .000.
 .....
 
+brown_b
+brown
+.....
+.000.
+.000.
+.000.
+.....
+
 dead
 red lightgrey
 .....
@@ -105,13 +113,14 @@ LEGEND
 
 . = Background
 b = black_b
+o = brown_b
 # = Wall
 - = exit
 P = Player and black_p
 x = Enemy_black
-unseeable = enemy_black or wall or black_p or black_b
+unseeable = enemy_black or wall or black_p or black_b or brown_b
 enemies = enemy_black
-blockade = wall or black_b or black_p
+blockade = wall or black_b or black_p or brown_b
 black_object = black_b or black_p
 black_check = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_left1 or black_check_down1 or black_check_right1
 black_checkxr1 = black_check_up or black_check_left or black_check_down or black_check_right or black_check_up1 or black_check_left1 or black_check_down1
@@ -131,6 +140,7 @@ Background
 exit
 shadow
 enemy_black, enemy_black1, enemy_black2
+brown_b
 black_b
 Wall, Player
 black_check_up
@@ -151,6 +161,8 @@ RULES
 [ > Player black_p] -> [ > Player > black_p ]
 [ > Player | black_b | unseeable] -> CANCEL
 [ > Player | black_b] -> [ > Player |> black_b ]
+[ > Player | brown_b | unseeable] -> CANCEL
+[ > Player | brown_b] -> [ > Player |> brown_b ]
 [ Player ] -> [ Player Shadow ]
 
 (begin raycasting code)
@@ -392,4 +404,3 @@ message Level 4: High security
 ############
 
 message CONGRATULATIONS! You have won...
-
